@@ -1,0 +1,34 @@
+
+h2. Definitions {anchor:definitions}
+
+h3. ResultBean {anchor:resultbean}
+
+||Name||Schema||
+|*code*\\ \\ _optional_||integer (int32)|
+|*data*\\ \\ _optional_||object|
+|*message*\\ \\ _optional_||string|
+
+
+h3. SysAlert {anchor:sysalert}
+
+||Name||Schema||
+|*companyId*\\ \\ _optional_||string|
+|*contentId*\\ \\ _optional_||integer (int64)|
+|*createdAt*\\ \\ _optional_||string (date-time)|
+|*description*\\ \\ _optional_||string|
+|*endTime*\\ \\ _optional_||integer (int64)|
+|*errorCode*\\ \\ _optional_||string|
+|*flag*\\ \\ _optional_||integer (int32)|
+|*id*\\ \\ _optional_||integer (int64)|
+|*ip*\\ \\ _optional_||string|
+|*level*\\ \\ _optional_||string|
+|*relId*\\ \\ _optional_||string|
+|*serverType*\\ \\ _optional_||enum (RECORDER, CONVENE, LIVE, SUPERVISOR, DELAYER, ENCODER, IPSWITCH, PGC)|
+|*startTime*\\ \\ _optional_||integer (int64)|
+|*taskId*\\ \\ _optional_||string|
+|*type*\\ \\ _optional_||string|
+|*userId*\\ \\ _optional_||string|
+|*username*\\ \\ _optional_||string|
+
+
+

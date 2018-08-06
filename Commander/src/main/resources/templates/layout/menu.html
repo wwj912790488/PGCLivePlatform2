@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/js/bootstrap/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/js/metisMenu/metisMenu.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/js/bootstrap-sb-admin-2/css/sb-admin-2.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <!--[if lt IE 9]>
+	<script th:src="@{/js/html5shiv/html5shiv.min.js}"></script>
+	<script th:src="@{/js/respond/respond.min.js}"></script>
+    <![endif]-->
+	</head>
+<body>
+	<!-- HEADER -->
+	<div id="wrapper">
+		<!-- Navigation -->
+		<div id="navbar_bk_div" th:fragment="menu" class="sidebar navbar-inverse" role="navigation">
+			<div class="sidebar-nav">
+				<ul class="nav nav-sidebar" id="side-menu" style="background-color: #232730">
+					<li sec:authorize="hasPermission('/dashboard','*')">
+						<a th:href="@{/dashboard}">
+								<span>
+									<img th:src="@{/images/default/Generalsituation.png}"/>
+								</span>
+							<span class="menu-name" th:text="#{dashboard.title}"> dashboard</span>
+						</a>
+					</li>
+					<li sec:authorize="hasPermission('/device/control','')" class="nav-second-li">
+						<a href="#">
+								<span>
+									<img th:src="@{/images/default/Equipment.png}"/>
+								</span>
+							<span class="menu-name" th:text="#{device.title}"></span>
+							<span class="fa arrow"></span>
+						</a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a th:href="@{/device/control}"><span th:text="#{device.control.title}"></span></a>
+							</li>
+							<li>
+								<a th:href="@{/device/convene}"><span th:text="#{device.convene.title}"></span></a>
+							</li>
+							<li>
+								<a th:href="@{/device/delayer}"><span th:text="#{device.delayer.title}"></span></a>
+							</li>
+							<li>
+								<a th:href="@{/device/ipswitch}"><span th:text="#{device.ipSwitch.title}"></span></a>
+							</li>
+							<li>
+								<a th:href="@{/device/recorder}"><span th:text="#{device.recorder.title}"></span></a>
+							</li>
+							<li>
+								<a th:href="@{/device/live}"><span th:text="#{device.live.title}"></span></a>
+							</li>
+							<li>
+								<a th:href="@{/device/supervisor}"><span th:text="#{device.supervisor.title}"></span></a>
+							</li>
+						</ul>
+						<!-- /.nav-second-level -->
+					</li>
+
+					<li sec:authorize="hasPermission('/content','')">
+						<a th:href="@{/content}">
+								<span>
+									<img th:src="@{/images/default/content.png}"/>
+								</span>
+							<span class="menu-name" th:text="#{content.title}"> content</span>
+						</a>
+					</li>
+					<li sec:authorize="hasPermission('/supervisor','')">
+						<a th:href="@{/supervisor}" >
+								<span>
+									<img th:src="@{/images/default/monitor.png}"/>
+								</span>
+							<span class="menu-name" th:text="#{supervisor.title}"> supervisor</span>
+						</a>
+					</li>
+					<li sec:authorize="hasPermission('/template','')">
+						<a th:href="@{/template/page}">
+								<span>
+									<img th:src="@{/images/default/Model.png}"/>
+								</span>
+							<span class="menu-name" th:text="#{profile.title}"> profile</span>
+						</a>
+					</li>
+					<!--<li sec:authorize="hasPermission('/task','')">-->
+					<!--<a href="#"><i class="fa fa-sitemap fa-fw"></i> <span th:text="#{task.title}"></span><span-->
+					<!--class="fa arrow"></span></a>-->
+					<!--<ul class="nav nav-second-level">-->
+					<!--<li>-->
+					<!--<a th:href="@{/task/recorder}"><span th:text="#{task.recorder.title}"></span></a>-->
+					<!--</li>-->
+
+					<!--<li>-->
+					<!--<a th:href="@{/task/live}"><span th:text="#{task.live.title}"></span></a>-->
+					<!--</li>-->
+					<!--</ul>-->
+					<!--&lt;!&ndash; /.nav-second-level &ndash;&gt;-->
+					<!--</li>-->
+
+					<li sec:authorize="hasPermission('/material','material_motionicon')" id="material">
+						<a th:href="@{/material}" >
+								<span>
+									<img th:src="@{/images/default/Material.png}"/>
+								</span>
+							<span class="menu-name" th:text="#{material.title}"> material</span>
+						</a>
+					</li>
+					<li sec:authorize="hasPermission('/user','')">
+						<a th:href="@{/user}" >
+								<span>
+									<img th:src="@{/images/default/user.png}"/>
+								</span>
+							<span class="menu-name" th:text="#{user.user.title}"> alert</span>
+						</a>
+					</li>
+
+					<li sec:authorize="hasPermission('/alert','')">
+						<a th:href="@{/alert}" >
+								<span>
+									<img th:src="@{/images/default/alarm.png}"/>
+								</span>
+							<span class="menu-name" th:text="#{alert.title}"> alert</span>
+						</a>
+					</li>
+
+					<li sec:authorize="hasPermission('/log','')">
+						<a th:href="@{/log}" >
+								<span>
+									<img th:src="@{/images/default/Icon_Settings.png}"/>
+								</span>
+							<span class="menu-name" th:text="#{log.title}"> alert</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--/HEADER -->
+
+</body>
+</html>

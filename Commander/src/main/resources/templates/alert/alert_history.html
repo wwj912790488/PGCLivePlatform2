@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout/default">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"/>
+    <script th:src="@{/js/moment/moment.js}"></script>
+    <script th:src="@{/js/moment/moment-with-locales.js}"></script>
+    <script th:src="@{/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/js/alert/alert_history.js}"></script>
+</head>
+<body>
+<div id="page-wrapper" >
+    <div layout:fragment="content">
+        <div class="clearfix" style="margin-bottom: 24px;"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav nav-tabs">
+                    <li><a th:href="@{/alert}"><span th:text="#{alert.current.title}"></span></a></li>
+                    <li class="active"><a th:href="@{/alert/history}"><span th:text="#{alert.history.title}"></span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 18px;"></div><!-- 清除浮动 -->
+        <form class="form-inline" id="alert-form" th:action="@{/alert/history/export}" method="post">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group form-group-sm space-right-10">
+                        <label class="app-ui-label" th:text="#{alert.content.id} + ':'" autofocus="autofocus"></label>
+                        <div class="input-group">
+                            <input class="form-control" name="contentId" th:value="${contentId}" th:type="number" th:min="0" style="width:80px;"/>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm space-right-10">
+                        <label class="app-ui-label" th:text="#{alert.type} + ':'"></label>
+                        <select class="form-control" name="type">
+                            <option value="" th:text="#{form.select.all}"></option>
+                            <option th:each="m, stat : ${alertTypes}" th:value="${m.name()}" th:text="${m.key}" th:selected="${m.name() == type}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group form-group-sm space-right-10">
+                        <label class="app-ui-label" th:text="#{alert.serverType} + ':'"></label>
+                        <select class="form-control" name="serverType">
+                            <option value="" th:text="#{form.select.all}"></option>
+                            <option th:each="m, stat : ${serverTypes}" th:value="${m.name()}" th:text="${m.key}" th:selected="${m.name() == serverType}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group form-group-sm space-right-10">
+                        <label class="app-ui-label" th:text="#{alert.level} + ':'"></label>
+                        <select class="form-control" name="level">
+                            <option value="" th:text="#{form.select.all}"></option>
+                            <option th:each="m, stat : ${alertLevels}" th:value="${m.name()}" th:text="${m.key}"  th:selected="${m.name() == level}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group form-group-sm space-right-10">
+                        <label class="app-ui-label" th:text="#{alert.startTime}  + ':'" autofocus="autofocus"></label>
+                        <input class="form-control " name="startTime" th:value="${startTime}"/>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="app-ui-label" th:text="#{alert.endTime} + ':'" autofocus="autofocus"></label>
+                        <div class="input-group">
+                            <input class="form-control" name="endTime" th:value="${endTime}"/>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <div class="input-group input-group-sm custom-search-form">
+                            <input class="form-control" th:placeholder="#{form.input.keyword}" name="keyword" th:value="${keyword}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" id="search-button"><i class="fa fa-search"></i></button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix" style="margin-bottom: 16px;"></div><!-- 清除浮动 -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <button id="remove-button" class="btn btn-default space-right-10 app-ui-button" type="button" th:text="#{button.remove}"></button>
+                    <button id="export-button" class="btn btn-default space-right-10 app-ui-button" type="submit" th:text="#{button.export}"></button>
+                </div>
+            </div>
+        </form>
+        <div class="clearfix" style="margin-bottom: 16px;"></div><!-- 清除浮动 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="alert-list-table" class="table-overflow table dataTable table-striped table-bordered table-hover" style="min-width: 800px;">
+                    <thead>
+                    <tr>
+                        <th style="width: 36px;"><input type="checkbox" id="select_all"/></th>
+                        <th data-field="id" th:text="#{alert.id}">id</th>
+                        <th data-field="type" th:text="#{alert.type}"></th>
+                        <th data-field="serverType" th:text="#{alert.serverType}"></th>
+                        <th data-field="level" th:text="#{alert.level}"></th>
+                        <th data-field="description" th:text="#{alert.description}"></th>
+                        <th data-field="createdAt" th:text="#{alert.createdAt}"></th>
+                        <th data-field="ip" th:text="#{alert.ip}"></th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error" name="PGCLivePlatformServer">
+    <Properties>
+        <Property name="PID">????</Property>
+        <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%wEx</Property>
+        <Property name="FILE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%5p] ${sys:PID} --- [%15.15t] %-40.40c{1.} : %m%n%wEx</Property>
+        <Property name="baseDir">log</Property>
+        <Property name="baseFileName">pgcliveplatformserver</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="PGCLivePlatformServerRollingFile" fileName="${baseDir}/${baseFileName}.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM}/${baseFileName}-%d{yyyy-MM-dd-HH}-%i.log.zip">
+            <PatternLayout pattern="${FILE_LOG_PATTERN}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="200">
+                <Delete basePath="${baseDir}" maxDepth="2">
+                    <IfFileName glob="*/${baseFileName}-*.log.zip">
+                        <IfLastModified age="10d">
+                            <IfAny>
+                                <IfAccumulatedFileSize exceeds="100MB" />
+                                <IfAccumulatedFileCount exceeds="100" />
+                            </IfAny>
+                        </IfLastModified>
+                    </IfFileName>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="PGCLivePlatformServerRollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>

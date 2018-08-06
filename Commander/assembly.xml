@@ -1,0 +1,18 @@
+<assembly>
+    <id>release</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/target</directory>
+            <includes>
+                <include>pgclivecommander.jar</include>
+            </includes>
+            <fileMode>0777</fileMode>
+            <outputDirectory>/Install/build</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>../Install</directory>
+            <outputDirectory>/Install</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

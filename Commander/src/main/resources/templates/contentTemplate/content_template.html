@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default">
+<head>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/contentTemplate/contentTemplate.js}"></script>
+    <script th:replace="contentTemplate/content_template_detail :: #content_template_detail"></script>
+</head>
+<body>
+<div id="page-wrapper">
+    <div layout:fragment="content">
+
+        <div class="clearfix" style="margin-bottom: 20px;"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form class="form-inline" id="content-form">
+                    <button id="create" class="btn btn-sm btn-default btn-primary" type="button" th:text="#{template.createBtn}" ></button>
+                    <button id="edit" class="btn btn-sm btn-default" type="button" th:text="#{template.editBtn}" disabled="disabled"></button>
+                    <button id="remove" class="btn btn-sm btn-default" type="button" th:text="#{template.deleteBtn}" disabled="disabled"></button>
+
+                    <div class="form-group space-right pull-right has-feedback">
+                        <div class="input-group input-group-sm custom-search-form">
+                            <input class="form-control" th:placeholder="#{form.input.keyword}" name="keyword">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="search-button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 20px;"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="template-table" class="table dataTable table-striped table-bordered table-hover" style="min-width: 850px">
+                    <thead>
+                    <tr>
+                        <th style="width: 36px;"><input type="checkbox" id="select_all"/></th>
+                        <th data-field="id" th:text="#{template.id}">id</th>
+                        <th data-field="name" th:text="#{template.name}">name</th>
+                        <th data-field="displayName" th:text="#{template.displayName}">displayName</th>
+                        <th data-field="resolution" th:text="#{template.resolution}">resolution</th>
+                        <th data-field="videoFormat" th:text="#{template.videoFormat}">videoFormat</th>
+                        <th data-field="frameRate" th:text="#{template.frameRate}">frameRate</th>
+                        <th data-field="videoBitrate" th:text="#{template.videoBitrate}">videoBitrate</th>
+                        <th data-field="audioForamt" th:text="#{template.audioFormat}">audioFormat</th>
+                        <th data-field="audioBitrate" th:text="#{template.audioBitrate}">audioBitrate</th>
+                        <th data-field="type" th:text="#{template.type}">type</th>
+
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal fade bs-example-modal-lg" id="template-add" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top: 100px;">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h5 class="modal-title" id="modelTitle"></h5>
+                    </div>
+                    <div class="modal-body" id="bodyContent">
+
+                        <div id="content-panl">
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+</body>
+</html>

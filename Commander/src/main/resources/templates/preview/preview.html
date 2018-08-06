@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default">
+<head>
+    <!--<script th:src="@{/js/bilibili/flv.js}"></script>-->
+    <script th:src="@{js/tmplayer/common/String_zh.js}"></script>
+    <script th:src="@{js/tmplayer/common/util.js}"></script>
+    <script th:src="@{js/tmplayer/common/uictrl.js}"></script>
+    <script th:src="@{js/tmplayer/common/CommonDefine.js}"></script>
+    <script th:src="@{js/tmplayer/common/mediainfo.js}"></script>
+    <script th:src="@{js/tmplayer/common/MediaInfoParser.js}"></script>
+    <script th:src="@{js/tmplayer/common/playerutil.js}"></script>
+    <script th:src="@{js/tmplayer/common/playerui.js}"></script>
+    <script th:src="@{/js/preview/preview.js}"></script>
+</head>
+<body >
+<div id="page-wrapper" layout:fragment="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" th:text="#{preview.title}">Blank</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form">
+                    <div class="form-group">
+                        <input class="form-control" id="player-path" th:value="${path}" required="required"/>
+                    </div>
+                </div>
+                <!--<video autoplay controls id="videoPlayer"></video>-->
+                <div id="player-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+#!/bin/bash
+#
+# pgclive_commander        This shell script takes care of starting and stopping
+#               the ArcVideo PGCLIVE Commander System (pgclive_commander).
+#
+# chkconfig: 2345 85 15
+# description: The ArcVideo Pgclive Commander System.
+#
+#
+# Source profile settings
+#
+. /etc/profile
+
+#
+# Source function library.
+#
+. /etc/rc.d/init.d/functions
+
+#
+# initial values
+#
+PROG=pgclive_commander
+ARCVIDEO_HOME={ARCVIDEO_HOME}
+PGCLIVE_COMMANDER_NAME={PGCLIVE_COMMANDER_NAME}
+JAVA_HOME={JAVA_HOME}
+#
+# Set timeouts here
+#
+STOP_TIMEOUT=10
+RETVAL=0
+
+#
+# start service
+#
+start() {
+  PID=`ps -ef | grep $PGCLIVE_COMMANDER_NAME | grep -v grep | awk '{print $2}'`
+  if [ ! -z "$PID" ]; then
+    echo "The $PROG: is already running, pid=$PID"
+  else
+    echo $"Starting $PROG: "
+	cd $ARCVIDEO_HOME
+	echo `pwd`
+	echo "nohup $JAVA_HOME/java -jar -Dspring.config.location=commander.properties -Xms256m -Xmx2048m -XX:PermSize=64m -XX:MaxPermSize=512m $PGCLIVE_COMMANDER_NAME >/dev/null 2>&1 &"
+	nohup $JAVA_HOME/java -jar -Dspring.config.location=commander.properties -Xms256m -Xmx2048m -XX:PermSize=64m -XX:MaxPermSize=512m $PGCLIVE_COMMANDER_NAME >/dev/null 2>&1 &
+  fi
+}
+
+#
+# stop service
+#
+stop() {
+  PID=`ps -ef | grep $PGCLIVE_COMMANDER_NAME | grep -v grep | awk '{print $2}'`
+  if [ ! -z "$PID" ]; then
+    # try term the application before force kill
+    echo -n $"Stopping  $PROG:"
+	kill -TERM $PID >/dev/null 2>&1
+
+	if checkpid $PID 2>&1; then
+      # check pid every 1s
+      usleep 100000
+      count=$STOP_TIMEOUT
+      while checkpid $PID && [ "$count" -gt 0 ]; do
+        sleep 1
+        count=$(($count-1))
+      done
+
+      # if timeout, force kill the process
+      if checkpid $PID; then
+        kill -KILL $PID >/dev/null 2>&1
+      fi
+    fi
+  fi
+}
+
+#
+# service status
+#
+status() {
+  PID=`ps -ef | grep $PGCLIVE_COMMANDER_NAME | grep -v grep | awk '{print $2}'`
+  if [ ! -z "$PID" ]; then
+    echo "$PROG: is running, pid=$PID"
+  else
+    echo "$PROG: is not running"
+  fi
+}
+
+#
+# See how we were called.
+#
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status
+    ;;
+  restart)
+   stop
+   start
+   ;;
+  *)
+   echo $"Usage: $PROG {start|stop|restart|status}"
+   RETVAL=2
+esac
+
+exit $RETVAL

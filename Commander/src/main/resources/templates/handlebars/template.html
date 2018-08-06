@@ -1,0 +1,269 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <script type="text/x-handlebars-template" id="table_detail_template">
+        <div id="content-detail-{{id}}">
+            <div class="media">
+                <div class="media-left">
+                    <img class="media-object live-task-thumb" th:src='@{/images/login_bk.png}'  width="138px" height="90px"/>
+                </div>
+                <div class="media-body">
+                    <h5 class="media-heading" style="font-weight: 600;">信源详情</h5>
+                    <div style="font-size: 11px;">
+                        <div class="row">
+                            <div class="col-xs-1 text-right">主源:</div>
+                            <div class="col-xs-11 text-left">
+                                <span class="master-source-uri">{{getSourceURI master}} </span>
+                                {{#ifSourceUriEmpty master}}
+                                <a class="btn-clipboard" data-clipboard-text="{{getSourceURI master}}" role="button"><i class="fa fa-files-o"></i></a>
+                                {{/ifSourceUriEmpty}}
+                                <span style="margin-left: 30px;" id="master-random-udp-{{id}}">{{master.udpUri}}</span>
+                                <a id="master-random-clipboard-{{id}}" {{#if master.udpUri}} {{else}} hidden='hidden' {{/if}}
+                                    class="btn-clipboard" data-clipboard-text="{{master.udpUri}}" role="button">
+                                    <i class="fa fa-files-o"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-1 text-right"></div>
+                            <div class="col-xs-11 text-left master-media-info"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-1 text-right">备源:</div>
+                            <div class="col-xs-11 text-left">
+                                <span class="slave-source-uri">{{getSourceURI slave}}</span>
+                                {{#ifSourceUriEmpty slave}}
+                                <a class="btn-clipboard" data-clipboard-text="{{getSourceURI slave}}" role="button"><i class="fa fa-files-o"></i></a>
+                                {{/ifSourceUriEmpty}}
+                                <span style="margin-left: 30px;" id="slave-random-udp-{{id}}">{{slave.udpUri}}</span>
+                                <a id="slave-random-clipboard-{{id}}" {{#if slave.udpUri}} {{else}} hidden='hidden' {{/if}}
+                                    class="btn-clipboard" data-clipboard-text="{{slave.udpUri}}" role="button">
+                                    <i class="fa fa-files-o"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-1 text-right"></div>
+                            <div class="col-xs-11 text-left slave-media-info"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-1 text-right">垫源:</div>
+                            <div class="col-xs-11 text-left">
+                                <span class="backup-source-uri"> {{backup}}</span>
+                                {{#if backup}}
+                                <a class="btn-clipboard" data-clipboard-text="{{backup}}" role="button"><i class="fa fa-files-o"></i></a>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-1 text-right"></div>
+                            <div class="col-xs-11 text-left backup-media-info"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="media">
+                <div class="media-body" style="padding-left: 148px;">
+                    <h5 class="media-heading" style="font-weight: 600;">分发详情</h5>
+                    <div style="font-size: 11px;">
+                        {{#each outputs}}
+                        <div class="row">
+                            <div class="col-xs-1 text-right">{{#if_eq @index 0}}发布地址:{{/if_eq}}</div>
+                            <div class="col-xs-3 text-left">
+                                {{this.outputUri}}
+                                {{#if this.outputUri}}
+                                <a class="btn-clipboard" data-clipboard-text="{{this.outputUri}}" role="button"><i class="fa fa-files-o"></i></a>
+                                {{/if}}
+                            </div>
+                        </div>
+                        {{/each}}
+                        <div class="row">
+                            <div class="col-xs-1 text-right">动图:</div>
+                            <div class="col-xs-1 text-left">
+                                {{#each icons}}
+                                    {{positionFormat this.posType}}    &nbsp;
+                                {{/each}}
+                            </div>
+                            <div class="col-xs-1 text-right">台标:</div>
+                            <div class="col-xs-1 text-left">
+                                {{#each logos}}
+                                    {{positionFormat this.posType}}    &nbsp;
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-handlebars-template" id="screen_template">
+
+        {{#each this}}
+            <div class="wrap">
+                <input type="hidden" name="screenId" value="{{id}}">
+                <input type="hidden" name="bind" value="{{bind}}">
+                <input type="hidden" name="deviceId" value="{{deviceId}}">
+                {{#each screenInfos}}
+                    <div class="item-info">
+                        <input type="hidden" name="posIdx" value="{{posIdx}}">
+                        <input type="hidden" name="contentId" value="{{contentId}}">
+                        <input type="hidden" name="sourceFrom" value="{{sourceFrom}}">
+                        <div class="item" style="width: {{width}};height: {{height}};line-height:{{height}};overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{screenTitle}}
+                            <div class="hover-content">
+                                <a class="item-delete" onclick="return false">
+                                    <img src="./images/default/delete_n.png">
+                                </a>
+                                <a class="item-edit">
+                                    <img src="./images/default/edit_n.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+                <div class="clearfix" style="margin-bottom: 10px;"></div>
+                <div style="height: 34px">
+                    <span class="TaskStatus TaskStatusGrey">{{name}}</span>
+                    <button class="btn btn-primary pull-right remove-btn" type="button" th:text="#{button.remove}"></button>
+                    <button class="btn btn-primary pull-right stop-btn" style="margin-right: 10px" type="button" th:text="#{button.stop}" ></button>
+                    <button class="btn btn-primary pull-right start-btn" style="margin-right: 10px" type="button" th:text="#{button.start}" ></button>
+                    <button class="btn btn-primary pull-right setting-btn" style="margin-right: 10px" type="button" th:text="#{button.setting}"></button>
+                </div>
+                <div class="clearfix" style="margin-bottom: 20px;"></div>
+            </div>
+        {{/each}}
+    </script>
+
+
+    <script type="text/x-handlebars-template" id="content_row_buttons_template">
+        <a style="text-decoration:none" th:href="@{alert?serverType=CONVENE&contentId={{id}}}">
+            <span class="label label-status {{getConveneStateLevel this}}">{{getConveneStateInfo this}}</span>
+        </a>
+        <a style="text-decoration:none" th:href="@{alert?serverType=DELAYER&contentId={{id}}}">
+            <span class="label label-status {{getDelayerStateLevel this}}" th:if="${enableDelayer}">{{getDelayerStateInfo this}}</span>
+        </a>
+        <a style="text-decoration:none" th:href="@{alert?serverType=IPSWITCH&contentId={{id}}}">
+            <span class="label label-status {{getIpSwitchStateLevel this}}" th:if="${enableIpSwitch}">{{getIpSwitchStateInfo this}}</span>
+        </a>
+        <a style="text-decoration:none" th:href="@{alert?serverType=LIVE&contentId={{id}}}">
+            <span class="label label-status {{getLiveStateLevel this}}">直播</span>
+        </a>
+    </script>
+
+    <script type="text/x-handlebars-template" id="live_row_buttons_template">
+        <button class="btn btn-xs btn-primary space-right dynamic-text-button" type="button">图文上下线</button>
+        <button class="btn btn-xs btn-primary space-right param-edit-button" type="button">参数调整</button>
+        <button class="btn btn-xs btn-primary space-right output-button" type="button">输出启停</button>
+        <button class="btn btn-xs btn-primary space-right alert-button" type="button">历史告警</button>
+    </script>
+
+    <script type="text/x-handlebars-template" id="storage_row_buttons_template">
+        <button class="btn btn-xs btn-primary space-right mount-button" type="button">挂载</button>
+        <button class="btn btn-xs btn-primary space-right umount-button" type="button">卸载</button>
+        <button class="btn btn-xs btn-primary space-right edit-button" type="button">编辑</button>
+        <button class="btn btn-xs btn-primary space-right delete-button" type="button">删除</button>
+    </script>
+
+    <script type="text/x-handlebars-template" id="setting_row_buttons_template">
+        <button class="btn btn-xs btn-primary space-right delete-button" type="button">删除</button>
+    </script>
+
+    <script type="text/x-handlebars-template" id="select_path_modal_template">
+        <div class="modal fade" id="select-path-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="select-path-modal-title">
+                            浏览路径：
+                            <span></span></h4>
+                    </div>
+                    <div class="modal-body div-modal-body">
+                        <div class="openfileBox">
+                            <div class="openfilecontent">
+                                <div id="openfile-dialog">
+                                    <div class="dlg-head">
+                                        <span id="openfile_path"></span>
+                                    </div>
+                                    <div class="dlg_body" id="openfile_body">
+                                        <div class="jstree-container">
+                                            <div id="jstree_div"></div>
+                                        </div>
+                                    </div>
+                                    <div class="dlg_foot text-center">
+                                        <button type="button" class="btn btn-primary btn-face" data-dismiss="modal" id="openfile-ok" >确定</button>
+                                        <button type="button" class="btn btn-primary btn-face" data-dismiss="modal" aria-label="Close">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-handlebars-template" id="content_output_item_template">
+        <div class="form-group form-group-sm">
+            <label class="col-sm-1 control-label app-ui-label output-label-index" autofocus="autofocus">输出设置 {{count}}:</label>
+            <div class="col-sm-2">
+                <select class="form-control" required="required" id="output-templateId">
+                    <option th:each="template, templateStat : ${templateList}" th:value="${template.id}" th:text="${template.name}"></option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <select name="type" class="form-control protocol-select" style="width: auto;">
+                            <option value="rtmp">rtmp</option>
+                            <option value="udp">udp</option>
+                            <option value="hls">hls</option>
+                        </select>
+                    </div>
+                    <input class="form-control" required="required" id="output-outputUri" pattern="^rtmp://.*$" placeholder="rtmp://www.arcvideo.com/live/test"/>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-default btn-xs remove-button" th:text="#{button.remove}"></button>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-handlebars-template" id="content_logo_item_template">
+        <div class="form-group form-group-sm">
+            <label class="col-sm-1 control-label app-ui-label" autofocus="autofocus">台标 {{count}}:</label>
+            <div class="col-sm-2">
+                <select class="form-control logo-pos-select" id="logo-posType">
+                    <option value="">无</option>
+                    <option th:each="pos, posStat : ${positionTypes}" th:value="${pos.name()}" th:text="${pos.key}"></option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control logo-material-select" id="logo-materialId" disabled="disabled">
+                    <option th:each="logo, logoStat : ${materialLogos}" th:value="${logo.id}" th:text="${logo.name}"></option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-default btn-xs remove-button" th:text="#{button.remove}"></button>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-handlebars-template" id="content_icon_item_template">
+        <div class="form-group form-group-sm">
+            <label class="col-sm-1 control-label app-ui-label" autofocus="autofocus">动图 {{count}}:</label>
+            <div class="col-sm-2">
+                <select class="form-control icon-pos-select" id="icon-posType">
+                    <option value="">无</option>
+                    <option th:each="pos, posStat : ${positionTypes}" th:value="${pos.name()}" th:text="${pos.key}"></option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control icon-material-select" id="icon-materialId" disabled="disabled">
+                    <option th:each="icon, iconStat : ${materialIcons}" th:value="${icon.id}" th:text="${icon.name}"></option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-default btn-xs remove-button" th:text="#{button.remove}"></button>
+            </div>
+        </div>
+    </script>
+</html>

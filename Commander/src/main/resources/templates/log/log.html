@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout/default">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"/>
+    <script th:src="@{/js/moment/moment.js}"></script>
+    <script th:src="@{/js/moment/moment-with-locales.js}"></script>
+    <script th:src="@{/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/js/log/log.js}"></script>
+</head>
+<body>
+<div id="page-wrapper">
+    <div layout:fragment="content">
+        <div class="clearfix" style="margin-bottom: 18px;"></div><!-- 清除浮动 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-inline" id="log-form">
+                    <button id="remove-button" class="btn btn-default space-right app-ui-button" type="button" th:text="#{button.remove}"></button>
+                    <div class="form-group space-right pull-right has-feedback">
+                        <div class="input-group input-group-sm custom-search-form">
+                            <input class="form-control" th:placeholder="#{form.input.keyword}" name="keyword">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="search-button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm space-right pull-right">
+                        <label class="app-ui-label" th:text="#{alert.endTime} + ':'" autofocus="autofocus"></label>
+                        <input class="form-control" name="endTime"/>
+                    </div>
+                    <div class="form-group form-group-sm space-right pull-right">
+                        <label class="app-ui-label" th:text="#{alert.startTime} + ':'" autofocus="autofocus"></label>
+                        <input class="form-control" name="startTime"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 16px;"></div><!-- 清除浮动 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="alert-list-table" class="table-overflow table dataTable table-striped table-bordered table-hover" style="min-width: 1000px;">
+                    <thead>
+                    <tr>
+                        <th style="width: 36px;"><input type="checkbox" id="select_all"/></th>
+                        <th data-field="id" th:text="#{log.id}">id</th>
+                        <th data-field="createdTime" th:text="#{log.createAt}"></th>
+                        <th data-field="username" th:text="#{log.username}"></th>
+                        <th data-field="operation" th:text="#{log.operation}"></th>
+                        <th data-field="url" th:text="#{log.url}" style="min-width: 300px;"></th>
+                        <th data-field="params" th:text="#{log.params}"></th>
+                        <th data-field="ip" th:text="#{log.ip}" style="min-width: 120px;"></th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

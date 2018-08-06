@@ -1,0 +1,63 @@
+
+[[_definitions]]
+== Definitions
+
+[[_resultbean]]
+=== ResultBean
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|object
+|**message** +
+__optional__|string
+|===
+
+
+[[_sysalert]]
+=== SysAlert
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**companyId** +
+__optional__|string
+|**contentId** +
+__optional__|integer (int64)
+|**createdAt** +
+__optional__|string (date-time)
+|**description** +
+__optional__|string
+|**endTime** +
+__optional__|integer (int64)
+|**errorCode** +
+__optional__|string
+|**flag** +
+__optional__|integer (int32)
+|**id** +
+__optional__|integer (int64)
+|**ip** +
+__optional__|string
+|**level** +
+__optional__|string
+|**relId** +
+__optional__|string
+|**serverType** +
+__optional__|enum (RECORDER, CONVENE, LIVE, SUPERVISOR, DELAYER, ENCODER, IPSWITCH, PGC)
+|**startTime** +
+__optional__|integer (int64)
+|**taskId** +
+__optional__|string
+|**type** +
+__optional__|string
+|**userId** +
+__optional__|string
+|**username** +
+__optional__|string
+|===
+
+
+

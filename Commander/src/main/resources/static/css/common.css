@@ -1,0 +1,442 @@
+/*body {*/
+    /*background-color: #f8f8f8;*/
+/*}*/
+
+#wrapper {
+    width: 100%;
+}
+
+#page-wrapper {
+    padding: 0 15px;
+    /*min-height: 568px;*/
+    background-color: white;
+}
+
+.sidebar {
+    width: 165px;
+    position: absolute;
+    padding-top: 51px;
+}
+
+.sidebar ul li {
+    border-bottom: 1px solid #141313;
+}
+
+.sidebar ul li a {
+    color: #cbccc9;
+    border-right: 1px solid #141313;
+    height: 50px;
+}
+
+.sidebar ul li a.active {
+    background-color: #2a313a;
+    border-right: 0px;
+    border-left: 2px solid #00A0E9;
+}
+
+.sidebar ul li a:hover {
+    background-color: #2a313a;
+}
+
+.sidebar ul li a:focus {
+    background-color: #2b313a;
+}
+
+.sidebar ul li a span {
+    line-height: 30px;
+}
+
+.sidebar .arrow {
+    float: right;
+}
+
+.sidebar .fa.arrow:before {
+    content: "\f104";
+}
+
+.sidebar .active > a > .fa.arrow:before {
+    content: "\f107";
+}
+
+.sidebar .nav-second-level li a {
+    padding-left: 50px;
+}
+
+.nav-sidebar > .floatMenuLi {
+    width: 165px;
+    height: 50px;
+    border-bottom: 0px;
+    z-index: 10002;
+}
+
+.nav-sidebar > .floatMenuUL {
+    z-index: 10001;
+}
+
+.nav-sidebar > .floatMenuLi a {
+    background-color: #232730;
+}
+
+.navbar {
+    border-radius: 0px;
+}
+
+.main-top {
+    padding-left: 185px;
+    padding-top: 50px;
+    padding-right: 15px;
+    width: 100%;
+    background-color: white;
+}
+
+.user-info {
+    padding-right: 15px;
+}
+
+.retractMenu {
+    display: inline;
+    float: right;
+    position: relative;
+    left: 40px;
+    top: 10px;
+    width: 22px;
+    height: 16px;
+    background-position: 100% 100%;
+    background: url('../images/retractMenu_n.png') no-repeat;
+    cursor: pointer;
+}
+
+/*.nav-tabs > li > a {*/
+/*}*/
+
+/*.nav-tabs > li.active > a {*/
+/*border-top: 3px solid #00aef9;*/
+/*}*/
+
+/*.nav-tabs > li.active > a:hover {*/
+/*border-top: 3px solid #00aef9;*/
+/*}*/
+
+#page-wrapper {
+    padding-left: 0px;
+}
+
+td.details-control {
+    background: url('../images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+
+tr.shown td.details-control {
+    background: url('../images/details_close.png') no-repeat center center;
+}
+
+td.table_column {
+    max-width: 140px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+span.folder-selector-control {
+    cursor: pointer;
+}
+
+.app-ui-button {
+    padding: 6px 20px;
+    margin-right: 5px;
+}
+
+.app-ui-label {
+    padding-right: 5px;
+}
+
+.app-ui-select {
+    padding: 6px 5px;
+    min-width: 100px;
+    margin: 0px 5px;
+}
+
+.app-ui-input {
+    padding: 6px 5px;
+    min-width: 200px;
+    margin-right: 5px;
+}
+
+.app-ui-title {
+    font-size: 16px;
+}
+
+.app-ui-context {
+    margin-left: 25px;
+}
+
+.back-title {
+    font-size: 18px;
+    margin: 20px 0px;
+}
+
+.breadcrumb {
+    background-color: #FFF;
+    margin: 15px;
+    padding: 0px;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    font-size: 17px;
+    color: #000;
+}
+
+.space-right {
+    margin-right: 20px;
+}
+
+.space-right-10 {
+    margin-right: 10px;
+}
+
+.jstree-container {
+    height: 400px;
+    overflow: auto;
+}
+
+fieldset {
+    display: block;
+    -webkit-margin-start: 2px;
+    -webkit-margin-end: 2px;
+    -webkit-padding-before: 0.35em;
+    -webkit-padding-start: 0.75em;
+    -webkit-padding-end: 0.75em;
+    -webkit-padding-after: 0.625em;
+    min-width: -webkit-min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+    border: rgb(201, 201, 201) solid 1px;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+legend {
+    color: black;
+    padding-left: 3px;
+    width: 70px;
+    font-size: 16px;
+    border: none;
+    margin: 0;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.label-status {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+table thead {
+    background-color: #f4f7f9;
+}
+
+table th {
+    text-align: center;
+}
+
+.table-overflow {
+    table-layout: fixed; /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+}
+
+.table-overflow td {
+    width: 100%;
+    word-break: keep-all; /* 不换行 */
+    white-space: nowrap; /* 不换行 */
+    overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+
+.dataTables_wrapper > div:nth-of-type(2) > div {
+    overflow-x: auto;
+}
+
+/*nav-tabs 修改 begin */
+.nav-tabs > li {
+    border: 1px solid #dddddd;
+    margin-right: -1px;
+    background-color: #f7f7f7;
+    max-height: 37px;
+    min-width: 88px;
+}
+
+.nav-tabs > li.active {
+    border: 0;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    border-top: 3px solid #00A0E9;
+    max-height: 37px;
+    min-width: 88px;
+}
+
+.nav-tabs > li > a, .nav-tabs > li > a:focus, .nav-tabs > li > a:hover {
+    border-radius: 0;
+    margin-right: 0;
+    max-height: 37px;
+    min-width: 88px;
+    line-height: 1;
+    text-align: center;
+}
+
+/*nav-tabs 修改 end */
+
+.btn-default {
+    background-color: #f7f7f7;
+    border-color: #E4E3E4;
+}
+
+.btn-default[disabled]:hover {
+    background-color: #f7f7f7;
+    border-color: #E4E3E4;
+}
+
+/*btn-primary 修改 begin */
+.btn-primary {
+    color: #fff;
+    background-color: #00a0e9;
+    border-color: #00a0e9;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+    color: #fff;
+    background-color: #00a0e9;
+    border-color: #00a0e9;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #00a0e9;
+    border-color: #00a0e9;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #00a0e9;
+    border-color: #00a0e9;
+}
+
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.open > .dropdown-toggle.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.open > .dropdown-toggle.btn-primary:focus,
+.btn-primary:active.focus,
+.btn-primary.active.focus,
+.open > .dropdown-toggle.btn-primary.focus {
+    color: #00a0e9;
+    background-color: #00a0e9;
+    border-color: #00a0e9;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    background-image: none;
+}
+
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary.focus {
+    background-color: #00a0e9;
+    border-color: #00a0e9;
+}
+
+.btn-primary .badge {
+    color: #00a0e9;
+    background-color: #fff;
+}
+
+/*btn-primary 修改 end */
+
+/*分页器激活页颜色修改  begin */
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #00a0e9;
+    border-color: #00a0e9;
+}
+
+/*分页器激活页颜色修改  end */
+
+/*layui 弹出框 修改  begin */
+body .demo-class .layui-layer-title {
+    background: #171a21;
+    color: #fff;
+    border: none;
+}
+
+body .demo-class .layui-layer-setwin .layui-layer-close1 {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    color: #ffffff;
+}
+
+body .demo-class .layui-layer-setwin .layui-layer-close1:before {
+    content: "\e014";
+}
+
+/*layui 弹出框 修改  end */
+
+/**
+  * modal 模态框 全局css
+ */
+.modal-content {
+    border-radius: 0px;
+}
+
+.modal-header {
+    background-color: #080808;
+    color: #fff;
+}
+
+.close {
+    color: #fff;
+    opacity: 1;
+}
+
+.close:focus, .close:hover {
+    color: #fff;
+    opacity: 1;
+}
+
+.no-radius {
+    border-radius: 0px;
+}
+
+.red-icon {
+    color: #ff0000;
+    background-color: #ffffff;
+    padding-top: 10px;
+}
+
+.text-left {
+    text-align: left;
+    padding-left: 0px;
+    padding-right: 0px;
+}

@@ -1,0 +1,38 @@
+= spring-boot-starter-swagger
+
+
+[[_overview]]
+== Overview
+Starter for swagger 2.x
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : 1.1.0.RELEASE
+
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½
+__Contact Email__ : XXXX@qq.com
+
+
+=== License information
+[%hardbreaks]
+__License__ : Apache License, Version 2.0
+__License URL__ : https://www.apache.org/licenses/LICENSE-2.0.html
+__Terms of service__ : https://github.com/dyc87112/spring-boot-starter-swagger
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:10702
+__BasePath__ : /
+
+
+=== Tags
+
+* alert-api-controller : Alert Api Controller
+
+
+

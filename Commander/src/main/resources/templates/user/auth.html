@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>创建角色</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/js/bootstrap/css/bootstrap.css}" />
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/common.css}" />
+    <script th:src="@{/js/jquery/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/datatables/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/js/datatables/js/dataTables.bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap/validate/bootstrapValidator.min.js}"></script>
+    <script th:src="@{/js/validator.min.js}"></script>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/user/auth.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var userRoleList = [[${userRoleList}]];
+        var arrRoleIds = [];
+        userRoleList.forEach(function(userRole){
+            arrRoleIds.push(userRole.roleId);
+        });
+        /*]]>*/
+    </script>
+</head>
+<body>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+        <div class="row">
+            <input th:id="userId" th:type="hidden" th:value="${userId}">
+            <div class="col-lg-12">
+                <table id="role-list-table" class="table dataTable table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th style="width: 36px;"><input type="checkbox" id="select_all"/></th>
+                        <th data-field="id" th:text="#{user.role.id}">id</th>
+                        <th data-field="roleName" th:text="#{user.role.roleName}">roleName</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <nav class="navbar navbar-fixed-bottom">
+            <div class="row">
+                <div class="col-xs-offset-7 col-xs-5">
+                    <button type="button" id="cancel-button" style="width: 80px;" class="btn btn-default" th:text="#{button.cancel}"></button>
+                    <button type="button" id="auth-button" style="width: 80px;" class="btn btn-primary" th:text="#{user.user.auth}"></button>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/supervisor.css}"/>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:replace="handlebars/template :: #screen_template"></script>
+    <script th:src="@{/js/task/supervisor/supervisor.js}"></script>
+</head>
+<body>
+<div id="page-wrapper">
+    <div layout:fragment="content" style="overflow-y: auto">
+        <input type="hidden" id="forTB" th:value="${forTB}">
+        <div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+        <div class="row" id="addButton">
+            <div class="col-lg-12">
+                <button id="add-screen-button" class="btn btn-primary" type="button" th:text="#{supervisor.screen.add}"></button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12" id="screens">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

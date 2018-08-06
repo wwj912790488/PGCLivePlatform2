@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default">
+<head>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/task/live/liveTask.js}"></script>
+    <script th:replace="handlebars/template :: #live_row_buttons_template"></script>
+</head>
+<body>
+<div id="page-wrapper" layout:fragment="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" th:text="#{task.live.title}">Blank</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-inline" id="live-task-form">
+                    <div class="form-group space-right">
+                        <label th:text="#{task.live.channel}"></label>
+                        <select class="form-control" required="required" name="content.id">
+                            <option value="">全部</option>
+                            <option th:each="content, templateStat : ${contentList}" th:value="${content.value}" th:text="${content.name}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group space-right">
+                        <label th:text="#{task.live.status}"></label>
+                        <select class="form-control" required="required" name="status">
+                            <option value="">全部</option>
+                            <option value="2">运行</option>
+                            <option value="1">等待</option>
+                            <option value="0">就绪</option>
+                            <option value="4">错误</option>
+                            <option value="5">取消</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group space-right">
+                        <label th:text="#{form.input.keyword}"></label>
+                        <input class="form-control" name="keyword">
+                    </div>
+                    <button type="button" id="reset-button" class="btn btn-primary" th:text="#{button.reset}"></button>
+                    <button type="button" id="search-button" class="btn btn-primary" th:text="#{button.search}"></button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-inline">
+                    <button id="start-button" class="btn btn-default" type="button" th:text="#{button.start}" disabled="disabled"></button>
+                    <button id="stop-button" class="btn btn-default" type="button" th:text="#{button.stop}" disabled="disabled"></button>
+                    <button id="copy-button" class="btn btn-default" type="button" th:text="#{button.copy}" disabled="disabled"></button>
+                    <!--<button id="edit-button" class="btn btn-default" type="button" th:text="#{button.edit}"></button>-->
+                    <button id="remove-button" class="btn btn-default" type="button" th:text="#{button.remove}" disabled="disabled"></button>
+                    <button id="create-button" class="btn btn-primary pull-right" type="button" th:text="#{button.task.create}"></button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="task-live-table" class="table dataTable table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th style="width: 36px;"><input type="checkbox" id="select_all"/></th>
+                        <th data-field="id" th:text="#{task.live.id}">id</th>
+                        <th data-field="name" th:text="#{task.live.name}"></th>
+                        <th data-field="content.name" th:text="#{task.live.channel}"></th>
+                        <th data-field="inputUri" th:text="#{task.live.url}"></th>
+                        <th data-field="createUser" th:text="#{task.create.user}"></th>
+                        <th data-field="startTime" th:text="#{task.live.start.time}"></th>
+                        <th data-field="outputNum" th:text="#{task.live.num}"></th>
+                        <th data-field="liveTaskStatus" th:text="#{task.live.status}"></th>
+                        <th th:text="#{task.live.operate}">operate</th>
+                        <!--<th data-field="endTime" th:text="#{task.live.end.time}"></th>-->
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

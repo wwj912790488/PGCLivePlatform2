@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>创建角色</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/js/bootstrap/css/bootstrap.css}" />
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/common.css}" />
+    <script th:src="@{/js/jquery/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap/validate/bootstrapValidator.js}"></script>
+    <script th:src="@{/js/user/role/role_new.js}"></script>
+</head>
+<body>
+<div id="page-wrapper" >
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <form role="form" data-toggle="validator" id="add-role-form" th:action="@{/user/role/save}" th:object="${role}" method="POST">
+                    <div class="panel-body">
+                        <input th:type="hidden" th:field="*{id}">
+                        <input th:type="hidden" th:field="*{companyId}">
+                        <input th:type="hidden" th:field="*{companyName}">
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon" th:text="#{user.role.roleName}"></span>
+                                <input class="form-control" th:field="*{roleName}"/>
+                                <span class="input-group-addon" style="color: #ff0000;background-color:#ffffff">*</span>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" id="master-panel">
+                            <ul class="list-group">
+                                <li class="list-group-item" th:each="menu,menuStat: ${menuList}">
+                                    <input name="menuIds" th:checked="${#lists.contains(permList, '' + menu.id)}" type="checkbox" th:value="${menu.id}" /><span th:text="${menu.description}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" th:text="#{user.role.remarks}"></label>
+                            <div class="col-xs-9">
+                                <textarea class="form-control" rows="5" th:field="*{remarks}" ></textarea>
+                            </div>
+                        </div>
+
+                        <nav class="navbar navbar-fixed-bottom">
+                            <div class="row">
+                                <div class="col-xs-offset-7 col-xs-5">
+                                    <button type="button" id="cancel-button" style="width: 80px;" class="btn btn-default" th:text="#{button.cancel}"></button>
+                                    <button type="button" id="save-button" style="width: 80px;" class="btn btn-primary" th:text="#{button.save}"></button>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

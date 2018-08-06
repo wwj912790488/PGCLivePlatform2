@@ -1,0 +1,181 @@
+= spring-boot-starter-swagger
+
+
+[[_overview]]
+== Overview
+Starter for swagger 2.x
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : 1.1.0.RELEASE
+
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½
+__Contact Email__ : XXXX@qq.com
+
+
+=== License information
+[%hardbreaks]
+__License__ : Apache License, Version 2.0
+__License URL__ : https://www.apache.org/licenses/LICENSE-2.0.html
+__Terms of service__ : https://github.com/dyc87112/spring-boot-starter-swagger
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:10702
+__BasePath__ : /
+
+
+=== Tags
+
+* alert-api-controller : Alert Api Controller
+
+
+
+
+[[_paths]]
+== Paths
+
+[[_getsendusingpost]]
+=== alert告警
+....
+POST /api/alert/send
+....
+
+
+==== Description
+alert告警notes信息
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**access_token** +
+__required__|user access token|string
+|**Header**|**timestamp** +
+__optional__|access timestamp|integer (int32)
+|**Body**|**sysAlert** +
+__required__|告警实体sysAlert|<<_sysalert,SysAlert>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultbean,ResultBean>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json;charset=UTF-8`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* alert-api-controller
+
+
+==== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+
+
+[[_definitions]]
+== Definitions
+
+[[_resultbean]]
+=== ResultBean
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|object
+|**message** +
+__optional__|string
+|===
+
+
+[[_sysalert]]
+=== SysAlert
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**companyId** +
+__optional__|string
+|**contentId** +
+__optional__|integer (int64)
+|**createdAt** +
+__optional__|string (date-time)
+|**description** +
+__optional__|string
+|**endTime** +
+__optional__|integer (int64)
+|**errorCode** +
+__optional__|string
+|**flag** +
+__optional__|integer (int32)
+|**id** +
+__optional__|integer (int64)
+|**ip** +
+__optional__|string
+|**level** +
+__optional__|string
+|**relId** +
+__optional__|string
+|**serverType** +
+__optional__|enum (RECORDER, CONVENE, LIVE, SUPERVISOR, DELAYER, ENCODER, IPSWITCH, PGC)
+|**startTime** +
+__optional__|integer (int64)
+|**taskId** +
+__optional__|string
+|**type** +
+__optional__|string
+|**userId** +
+__optional__|string
+|**username** +
+__optional__|string
+|===
+
+
+
+
+[[_securityscheme]]
+== Security
+
+[[_authorization]]
+=== Authorization
+[%hardbreaks]
+__Type__ : apiKey
+__Name__ : TOKEN
+__In__ : HEADER
+
+
+

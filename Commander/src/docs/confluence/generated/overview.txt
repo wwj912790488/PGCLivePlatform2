@@ -1,0 +1,33 @@
+h1. spring-boot-starter-swagger
+
+
+h2. Overview {anchor:overview}
+Starter for swagger 2.x
+
+
+h3. Version information
+_Version_ : 1.1.0.RELEASE
+
+
+h3. Contact information
+_Contact_ : ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½\\ 
+_Contact Email_ : XXXX@qq.com
+
+
+h3. License information
+_License_ : Apache License, Version 2.0\\ 
+_License URL_ : https://www.apache.org/licenses/LICENSE-2.0.html\\ 
+_Terms of service_ : https://github.com/dyc87112/spring-boot-starter-swagger
+
+
+h3. URI scheme
+_Host_ : localhost:10702\\ 
+_BasePath_ : /
+
+
+h3. Tags
+
+* alert-api-controller : Alert Api Controller
+
+
+

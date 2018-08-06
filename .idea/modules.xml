@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Commander/Commander.iml" filepath="$PROJECT_DIR$/Commander/Commander.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PGCLivePlatform.iml" filepath="$PROJECT_DIR$/PGCLivePlatform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Message/PGCLivePlatformMessage.iml" filepath="$PROJECT_DIR$/Message/PGCLivePlatformMessage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SystemUtil/SystemUtil.iml" filepath="$PROJECT_DIR$/SystemUtil/SystemUtil.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"/>
+    <script th:src="@{/js/moment/moment.js}"></script>
+    <script th:src="@{/js/moment/moment-with-locales.js}"></script>
+    <script th:src="@{/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/js/content/content_new.js}"></script>
+    <script th:replace="handlebars/template :: #content_output_item_template"></script>
+    <script th:replace="handlebars/template :: #content_logo_item_template"></script>
+    <script th:replace="handlebars/template :: #content_icon_item_template"></script>
+</head>
+<body>
+<div id="page-wrapper">
+    <div layout:fragment="content">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a th:href="@{/content}" th:text="'< ' + #{content.back.title}"></a></li>
+            </ol>
+        </div>
+        <form class="form-horizontal" style="margin-left: 40px;" role="form" data-toggle="validator" id="add-content-form" th:action="@{/content/save}" th:object="${content}" method="POST">
+            <div class="row">
+                <div class="col-lg-12">
+                    <label  class="app-ui-title" th:text="#{content.basic.info}"></label>
+                </div>
+                <input th:type="hidden" th:field="*{id}">
+                <div class="col-lg-4">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.name} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <input class="form-control" th:field="*{name}" maxlength="20" required="required"/>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.start.time} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <input class="form-control" th:field="*{startTime}"/>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.end.time} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <input class="form-control" th:field="*{endTime}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.monitor.org} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <input class="form-control" th:field="*{monitorOrgName}"  maxlength="20"/>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.monitor.user} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <input class="form-control" th:field="*{monitorUserName}" maxlength="20"/>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.monitor.telephone} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <input class="form-control" th:field="*{telephone}" maxlength="20"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-lg-4">
+                    <label class="app-ui-title" th:text="#{content.source.settings}"></label>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.enable.slave} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" th:field="*{enableSlave}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.enable.backup} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" th:field="*{enableBackup}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <input th:type="hidden" th:field="*{master.id}">
+                    <input th:type="hidden" th:value="*{master.programId}" id="master-program-id">
+                    <input th:type="hidden" th:value="*{master.audioId}" id="master-audio-id">
+                    <input th:type="hidden" th:value="*{master.subtitleId}" id="master-subtitle-id">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.stream.type.master} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <select class="form-control" th:field="*{master.streamType}" required="required">
+                                <option value="1" th:text="#{content.stream.push}"></option>
+                                <option value="2" th:text="#{content.stream.pull}"></option>
+                                <option value="3" th:text="#{content.stream.udp}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.uri} + ':'" autofocus="autofocus"></label>
+                        <i class="fa fa-spinner fa fa-spin hidden waitimg"></i>
+                        <div class="col-sm-6">
+                            <input th:field="*{master.sourceUri}" class="form-control" th:required="*{master.streamType ne 1}" th:disabled="*{master.streamType eq 1}"/>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm" th:hidden="*{master.streamType ne 3}">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.stream.udp.program} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <select class="form-control" th:field="*{master.programId}" disabled="disabled"></select>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm" th:hidden="*{master.streamType ne 3}">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.stream.udp.audio} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <select class="form-control" th:field="*{master.audioId}" disabled="disabled"></select>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm" th:hidden="*{master.streamType ne 3}">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.stream.udp.subtitle} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <select class="form-control" th:field="*{master.subtitleId}" disabled="disabled"></select>
+                        </div>
+                    </div>
+
+                    <div th:if="${enableDelayer}" class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.enable.delay} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <input type="checkbox" id="masterEnableDelay" th:checked="*{master.duration != null}"/>
+                                    </span>
+                                <input th:field="*{master.duration}" class="form-control" th:placeholder="#{content.duration}"
+                                       th:disabled="*{master.duration == null}" th:required="*{master.duration != null}" th:type="number" min="0" max="300"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <input th:type="hidden" th:field="*{slave.id}" th:disabled="*{!enableSlave}">
+                    <input th:type="hidden" th:value="*{slave.programId}" id="slave-program-id">
+                    <input th:type="hidden" th:value="*{slave.audioId}" id="slave-audio-id">
+                    <input th:type="hidden" th:value="*{slave.subtitleId}" id="slave-subtitle-id">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.stream.type.slave}  + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <select class="form-control" th:field="*{slave.streamType}" th:required="*{enableSlave}" th:disabled="*{!enableSlave}">
+                                <option value="1" th:text="#{content.stream.push}"></option>
+                                <option value="2" th:text="#{content.stream.pull}"></option>
+                                <option value="3" th:text="#{content.stream.udp}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.uri} + ':'" autofocus="autofocus"></label>
+                        <i class="fa fa-spinner fa fa-spin hidden waitimg"></i>
+                        <div class="col-sm-6">
+                            <input th:field="*{slave.sourceUri}" class="form-control" th:required="*{slave.streamType eq 2}" th:disabled="*{slave.streamType eq 1}"/>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm" th:hidden="*{slave.streamType ne 3}">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.stream.udp.program} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <select class="form-control" th:field="*{slave.programId}" th:disabled="*{!enableSlave}"></select>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm" th:hidden="*{slave.streamType ne 3}">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.stream.udp.audio} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <select class="form-control" th:field="*{slave.audioId}" th:disabled="*{!enableSlave}"></select>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm" th:hidden="*{slave.streamType ne 3}">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.stream.udp.subtitle} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <select class="form-control" th:field="*{slave.subtitleId}" th:disabled="*{!enableSlave}"></select>
+                        </div>
+                    </div>
+                    <div th:if="${enableDelayer}" class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.enable.delay} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <input type="checkbox" id="slaveEnableDelay" th:checked="*{slave.duration != null}" th:disabled="*{!enableSlave}"/>
+                                    </span>
+                                <input th:field="*{slave.duration}" class="form-control" th:placeholder="#{content.duration}"
+                                       th:disabled="*{slave.duration == null}" th:required="*{slave.duration != null}" th:type="number" min="0" max="300"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.stream.type.backup} + ':'" autofocus="autofocus"></label>
+                        <div class="col-sm-6">
+                            <select class="form-control" th:value="3" id="backupStreamType" th:disabled="*{enableBackup == false}">
+                                <option value="3" th:text="#{content.stream.udp}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label app-ui-label" th:text="#{content.uri} + ':'" autofocus="autofocus"></label>
+                        <i class="fa fa-spinner fa fa-spin hidden waitimg"></i>
+                        <div class="col-sm-6">
+                            <input th:field="*{backup}" class="form-control" th:required="*{enableBackup}" th:disabled="*{!enableBackup}"/>
+                            <span class="error_msg" style="color: red"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="app-ui-title" th:text="#{content.publish.settings}"></label>
+                </div>
+                <div class="col-lg-12">
+                    <div id="output-group">
+                        <div th:if="*{#lists.isEmpty(outputs)}">
+                            <div class="output-item">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-1 control-label app-ui-label output-label-index" th:text="#{content.output.setting} + ' 1:'" autofocus="autofocus"></label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" required="required" id="output-templateId">
+                                            <option th:each="template, templateStat : ${templateList}" th:value="${template.id}" th:text="${template.name}"></option>
+                                        </select>
+                                    </div>
+                                    <div class=" col-sm-3">
+                                        <div class="input-group">
+                                            <div class="input-group-btn">
+                                                <select name="type" class="form-control protocol-select" style="width: auto;">
+                                                    <option value="rtmp">rtmp</option>
+                                                    <option value="udp">udp</option>
+                                                    <option value="hls">hls</option>
+                                                </select>
+                                            </div>
+                                            <input class="form-control app-ui-input" required="required" id="output-outputUri" pattern="^rtmp://.*" placeholder="rtmp://www.arcvideo.com/live/test"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" id="add-output-button" class="btn btn-default btn-xs" th:text="#{button.add}"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:unless="*{#lists.isEmpty(outputs)}" >
+                            <div th:each="output,iterStat : *{outputs}">
+                                <div class="output-item">
+                                    <div class="form-group form-group-sm">
+                                        <label class="col-sm-1 control-label app-ui-label output-label-index" th:text="#{content.output.setting} + ' ' + ${iterStat.index + 1} + ':'" autofocus="autofocus"></label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" required="required" id="output-templateId">
+                                                <option th:each="template, templateStat : ${templateList}" th:value="${template.id}" th:text="${template.name}" th:selected="${output.templateId == template.id}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <div class="input-group-btn">
+                                                    <select name="type" class="form-control protocol-select" style="width: auto;">
+                                                        <option value="rtmp" th:selected="${output.protocol == 'rtmp'}">rtmp</option>
+                                                        <option value="udp" th:selected="${output.protocol == 'udp'}">udp</option>
+                                                        <option value="hls" th:selected="${output.protocol == 'hls'}">hls</option>
+                                                    </select>
+                                                </div>
+                                                <input class="form-control app-ui-input" required="required" id="output-outputUri" th:value="${output.outputUri}" placeholder="rtmp://www.arcvideo.com/live/test"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1" th:if="${iterStat.index == 0}">
+                                            <button type="button" id="add-output-button" class="btn btn-default btn-xs" th:text="#{button.add}"></button>
+                                        </div>
+                                        <div class="col-sm-1" th:if="${iterStat.index != 0}">
+                                            <button type="button" class="btn btn-default btn-xs remove-button" th:text="#{button.remove}"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="app-ui-title" th:text="#{content.material.settings}"></label>
+                </div>
+                <div class="col-lg-12">
+                    <div id="logo-group">
+                        <div th:if="*{#lists.isEmpty(logos)}">
+                            <div class="logo-item">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-1 control-label app-ui-label" th:text="#{content.logo} + ' 1:'" autofocus="autofocus"></label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control logo-pos-select" id="logo-posType">
+                                            <option value="">无</option>
+                                            <option th:each="pos, posStat : ${positionTypes}" th:value="${pos.name()}" th:text="${pos.key}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select class="form-control logo-material-select" id="logo-materialId" disabled="disabled">
+                                            <option th:each="logo, logoStat : ${materialLogos}" th:value="${logo.id}" th:text="${logo.name}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" id="add-logo-button" class="btn btn-default btn-xs" th:text="#{button.add}"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:unless="*{#lists.isEmpty(logos)}" th:each="logo,iterStat : *{logos}">
+                            <div class="logo-item">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-1 control-label app-ui-label" th:text="#{content.logo} + ' ' + ${iterStat.index + 1} + ':'" autofocus="autofocus"></label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control logo-pos-select" id="logo-posType">
+                                            <option value="">无</option>
+                                            <option th:each="pos, posStat : ${positionTypes}" th:value="${pos.name()}" th:text="${pos.key}" th:selected="${logo.posType == pos}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select class="form-control logo-material-select" id="logo-materialId" th:disabled="${logo.posType}?false:true">
+                                            <option th:each="m, mStat : ${materialLogos}" th:value="${m.id}" th:text="${m.name}" th:selected="${logo.materialId == m.id}" ></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-1"  th:if="${iterStat.index == 0}">
+                                        <button type="button" id="add-logo-button" class="btn btn-default btn-xs" th:text="#{button.add}"></button>
+                                    </div>
+                                    <div class="col-sm-1" th:if="${iterStat.index != 0}">
+                                        <button type="button" class="btn btn-default btn-xs remove-button" th:text="#{button.remove}"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div id="icon-group">
+                        <div th:if="*{#lists.isEmpty(icons)}">
+                            <div class="icon-item">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-1 control-label app-ui-label" th:text="#{content.motionIcon} + ' 1:'" autofocus="autofocus"></label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control icon-pos-select" id="icon-posType">
+                                            <option value="">无</option>
+                                            <option th:each="pos, posStat : ${positionTypes}" th:value="${pos.name()}" th:text="${pos.key}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select class="form-control icon-material-select" id="icon-materialId" disabled="disabled">
+                                            <option th:each="icon, iconStat : ${materialIcons}" th:value="${icon.id}" th:text="${icon.name}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" id="add-icon-button" class="btn btn-default btn-xs" th:text="#{button.add}"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:unless="*{#lists.isEmpty(icons)}" th:each="icon,iterStat : *{icons}">
+                            <div class="icon-item">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-1 control-label app-ui-label" th:text="#{content.motionIcon} + ' ' + ${iterStat.index + 1} + ':'" autofocus="autofocus"></label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control icon-pos-select" id="icon-posType">
+                                            <option value="">无</option>
+                                            <option th:each="pos, posStat : ${positionTypes}" th:value="${pos.name()}" th:text="${pos.key}" th:selected="${icon.posType == pos}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select class="form-control icon-material-select" id="icon-materialId" th:disabled="${icon.posType}?false:true">
+                                            <option th:each="material, materialStat : ${materialIcons}" th:value="${material.id}" th:text="${material.name}" th:selected="${icon.materialId == material.id}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1" th:if="${iterStat.index == 0}">
+                                        <button type="button" id="add-icon-button" class="btn btn-default btn-xs" th:text="#{button.add}"></button>
+                                    </div>
+                                    <div class="col-sm-1" th:if="${iterStat.index != 0}">
+                                        <button type="button" class="btn btn-default btn-xs remove-button" th:text="#{button.remove}"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+            <hr/>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <a th:href="@{/content}" id="cancel-button" class="btn btn-default app-ui-button" th:text="#{button.cancel}"></a>
+                    <button type="submit" id="save-button" class="btn btn-primary app-ui-button" th:text="#{button.save}"></button>
+                </div>
+            </div>
+            <div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default">
+<head>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/profile/liveprofile.js}"></script>
+</head>
+<body>
+<div id="page-wrapper" layout:fragment="content">
+    <div class="container-fluid">
+        <input name="server" class="form-control" type="hidden"/>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" th:text="#{profile.title}">Blank</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav nav-tabs">
+                    <li class=""><a th:href="@{/profile}"><span class="hidden-inline-mobile" th:text="#{profile.record}"></span></a></li>
+                    <li class="active"><a th:href="@{/profile/liveprofile}"><span class="hidden-inline-mobile" th:text="#{profile.live}"></span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <form th:object="${server}">
+               <input type="hidden" th:field="*{address}" id="liveAddress">
+            </form>
+            <iframe src="" id="live_frame" style="border: 0px;width: 100%;height:500px;">
+            </iframe>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:login="http://www.thymeleaf.org/extras/login-mode">
+<head>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/user/user.js}"></script>
+</head>
+<body>
+<div id="page-wrapper">
+    <div layout:fragment="content">
+        <div class="clearfix" style="margin-bottom: 24px;"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a th:href="@{/user/}"><span th:text="#{user.user.list}"></span></a></li>
+                    <li><a th:href="@{/user/role}"><span th:text="#{user.role.title}"></span></a></li>
+                    <li sec:authorize="hasPermission('/tenant','')">
+                        <a th:href="@{/user/tenant}"><span th:text="#{user.tenant.title}"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 18px;"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-inline" id="content-form">
+                    <button login:mode="isCommon()" sec:authorize="hasAnyAuthority('Adminstrator','Admin')" id="create-button"  class="btn btn-primary" type="button" th:text="#{user.user.create}"></button>
+                    <button login:mode="isCas()" sec:authorize="hasAnyAuthority('Adminstrator','Admin')" id="sync-button" class="btn btn-primary" type="button" th:text="#{user.user.sync}"></button>
+                    <button sec:authorize="hasAnyAuthority('Adminstrator','Admin')"id="auth-button" class="btn btn-default" type="button" th:text="#{user.user.auth}"></button>
+                    <button login:mode="isCommon()" sec:authorize="hasAnyAuthority('Adminstrator','Admin')" id="edit-button" class="btn btn-default" type="button" th:text="#{button.edit}"></button>
+                    <button login:mode="isCommon()" id="change-pw-button" class="btn btn-default" type="button" th:text="#{user.user.change.password}"></button>
+                    <button login:mode="isCommon()" sec:authorize="hasAnyAuthority('Adminstrator','Admin')"id="disable-button" class="btn btn-default" type="button" th:text="#{user.user.disable}"></button>
+
+                    <div class="form-group space-right pull-right has-feedback">
+                        <div class="input-group input-group-sm custom-search-form">
+                            <input class="form-control" th:placeholder="#{form.input.keyword}" maxlength="20" name="keyword">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="search-button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 16px;"></div><!-- 清除浮动 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="user-list-table" class="table dataTable table-striped table-bordered table-hover" style="min-width: 800px">
+                    <thead>
+                    <tr>
+                        <th style="width: 36px;"><input class='select-item' type="checkbox" id="select_all"/></th>
+                        <th data-field="id" th:text="#{user.user.id}">id</th>
+                        <th data-field="name" th:text="#{user.user.name}">name</th>
+                        <th data-field="realName" th:text="#{user.user.realName}">realName</th>
+                        <th data-field="roleName" th:text="#{user.user.roleName}">roleName</th>
+                        <th data-field="companyName" th:text="#{user.user.companyName}">companyName</th>
+                        <th data-field="createTime" th:text="#{user.user.createTime}">createTime</th>
+                        <th data-field="remarks" th:text="#{user.user.remarks}">remarks</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg" id="template-add" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="modelTitle"></h5>
+                </div>
+                <div class="modal-body" id="bodyContent">
+
+                    <div id="content-panl">
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

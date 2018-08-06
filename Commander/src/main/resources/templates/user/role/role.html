@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/user/role/role.js}"></script>
+</head>
+<body>
+<div id="page-wrapper">
+    <div layout:fragment="content">
+        <div class="clearfix" style="margin-bottom: 24px;"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav nav-tabs">
+                    <li ><a th:href="@{/user/}"><span th:text="#{user.user.list}"></span></a></li>
+                    <li class="active"><a th:href="@{/user/role}"><span th:text="#{user.role.title}"></span></a></li>
+                    <li sec:authorize="hasPermission('/tenant','')">
+                        <a th:href="@{/user/tenant}"><span th:text="#{user.tenant.title}"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 18px;"></div><!-- 清除浮动 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-inline" id="content-form">
+                    <button sec:authorize="hasAnyAuthority('Adminstrator','Admin')" id="create-button" class="btn btn-primary" type="button" th:text="#{user.role.create}"></button>
+                    <button sec:authorize="hasAnyAuthority('Adminstrator','Admin')" id="edit-button" class="btn btn-default" type="button" th:text="#{button.edit}"></button>
+                    <button sec:authorize="hasAnyAuthority('Adminstrator','Admin')" id="remove-button" class="btn btn-default" type="button" th:text="#{button.remove}"></button>
+
+
+                    <div class="form-group space-right pull-right has-feedback">
+                        <div class="input-group input-group-sm custom-search-form">
+                            <input class="form-control" th:placeholder="#{form.input.keyword}" maxlength="20" name="keyword">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="search-button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 16px;"></div><!-- 清除浮动 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="role-list-table" class="table dataTable table-striped table-bordered table-hover" style="min-width: 800px">
+                    <thead>
+                    <tr>
+                        <th style="width: 36px;"><input type="checkbox" id="select_all"/></th>
+                        <th data-field="id" th:text="#{user.role.id}">id</th>
+                        <th data-field="roleName" th:text="#{user.role.roleName}">roleName</th>
+                        <th data-field="createTime" th:text="#{user.role.createTime}">createTime</th>
+                        <th data-field="companyName" th:text="#{user.role.companyName}">companyName</th>
+                        <th data-field="createUserName" th:text="#{user.role.createUserName}">createUserName</th>
+                        <th data-field="remarks" th:text="#{user.role.remarks}">remarks</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

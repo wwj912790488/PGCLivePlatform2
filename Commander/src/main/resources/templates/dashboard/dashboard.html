@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout/default">
+<head>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/dashboard.css}" />
+    <script th:src="@{/js/dashboard/dashboard.js}"></script>
+</head>
+<body>
+<div id="page-wrapper">
+    <div id="dashboard_bk_div" layout:fragment="content" style="background-color: #2b313b; border-left: 0px;">
+        <div class="row" th:if="${isAdministrator}">
+            <div class="col-md-12">
+                <div class="statistics_div">
+                    <div class="statistics_type_div">
+                        <div class="statistics_type_img">
+                            <img src="/images/Equipment.png">
+                        </div>
+                        <div class="statistics_type_text">
+                            连接状态
+                        </div>
+                    </div>
+                    <div class="statistics_hr_div">
+                        <hr class="statistics_hr" color="#252932"/>
+                    </div>
+
+                    <div id="connect-info">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" >
+            <div class="col-lg-6 statistics_min_width">
+                <div class="statistics_div">
+                    <div class="statistics_type_div">
+                        <div class="statistics_type_img">
+                            <img src="/images/Yado.png">
+                        </div>
+                        <div class="statistics_type_text">
+                            活动状态
+                        </div>
+                    </div>
+                    <div class="statistics_hr_div">
+                        <hr class="statistics_hr" color="#252932"/>
+                    </div>
+                    <div class="statistics_type_title">
+                        活动总数:<span id="contentCount">0</span>
+                        <div class="statistics_type_count">
+                            <div class="statistics_count_nomal" id="contentNormalCount">0</div>
+                            <div class="statistics_count_over" id="contentCompleteCount">0</div>
+                            <div class="statistics_count_alarm" id="contentAlertCount">0</div>
+                        </div>
+                        <br>
+                        <div>
+                            <div class="statistics_count_nomal_text">
+                                <img src="/images/normal.png">
+                                正常个数
+                            </div>
+                            <div class="statistics_count_over_text">
+                                <img src="/images/stop.png">
+                                结束个数
+                            </div>
+                            <div class="statistics_count_alarm_text">
+                                <img src="/images/alarm2.png">
+                                告警个数
+                            </div>
+                        </div>
+                    </div>
+                    <div class="statistics_type_more">
+                        <a sec:authorize="hasPermission('/content','')" th:href="@{/content}">
+                            <img src="/images/more_n.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 statistics_min_width">
+                <div class="statistics_div">
+                    <div class="statistics_type_div">
+                        <div class="statistics_type_img">
+                            <img src="/images/recond.png">
+                        </div>
+                        <div class="statistics_type_text">
+                            录制状态
+                        </div>
+                    </div>
+                    <div class="statistics_hr_div">
+                        <hr class="statistics_hr" color="#252932"/>
+                    </div>
+                    <div class="statistics_type_title">
+                        录制总数:<span id="recordCount"></span>
+                        <div class="statistics_type_count">
+                            <div class="statistics_count_nomal" id="recordNormalCount">0</div>
+                            <div class="statistics_count_over" id="recordCompleteCount">0</div>
+                            <div class="statistics_count_alarm" id="recordAlertCount">0</div>
+                        </div>
+                        <br>
+                        <div>
+                            <div class="statistics_count_nomal_text">
+                                <img src="/images/normal.png">
+                                正常个数
+                            </div>
+                            <div class="statistics_count_over_text">
+                                <img src="/images/stop.png">
+                                结束个数
+                            </div>
+                            <div class="statistics_count_alarm_text">
+                                <img src="/images/alarm2.png">
+                                告警个数
+                            </div>
+                        </div>
+                    </div>
+                    <div class="statistics_type_more" style="display: none">
+                        <a>
+                            <img src="/images/more_n.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="statistics_alarm_div">
+                    <div class="statistics_type_alarm_div">
+                        <div class="statistics_type_img">
+                            <img src="/images/alarm.png">
+                        </div>
+                        <div class="statistics_type_text">
+                            告警信息
+                        </div>
+                    </div>
+                    <div class="statistics_hr_div">
+                        <hr class="statistics_alarm_hr" color="#252932"/>
+                    </div>
+                    <div class="statistics_type_more">
+                        <a th:href="@{/alert}">
+                            <img src="/images/more_n.png">
+                        </a>
+                    </div>
+                    <div id="alert-info"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

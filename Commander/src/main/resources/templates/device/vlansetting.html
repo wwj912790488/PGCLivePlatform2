@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default">
+<head>
+    <script th:src="@{/js/device/vlansetting.js}"></script>
+</head>
+<body>
+<div id="page-wrapper">
+    <div layout:fragment="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" th:text="#{device.control.title}">Blank</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav nav-tabs">
+                    <li><a th:href="@{/device/control}" th:text="#{setting.udp.pool}"></a></li>
+                    <li class="active"><a th:href="@{/device/control/vlan}"th:text="#{setting.vlan.setting}"></a></li>
+                    <li><a th:href="@{/device/control/version}" th:text="#{setting.version}"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-inline" id="material-from">
+                            <button id="create-button" class="btn btn-default app-ui-button" type="button" th:text="#{button.add}"></button>
+                            <button id="edit-button" class="btn btn-default app-ui-button" type="button" th:text="#{button.edit}"></button>
+                            <button id="remove-button" class="btn btn-default space-right app-ui-button" type="button" th:text="#{button.remove}"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix" style="margin-bottom: 20px;"></div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="vlan-setting-table" class="table dataTable table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" id="select_all"/></th>
+                                <th data-field="id" th:text="#{setting.vlan.id}"></th>
+                                <th data-field="name" th:text="#{setting.vlan.name}"></th>
+                                <th data-field="tag" th:text="#{setting.vlan.tag}"></th>
+                                <th data-field="cidr" th:text="#{setting.vlan.cidr}"></th>
+                                <th data-field="nioType" th:text="#{setting.vlan.type}"></th>
+                                <th data-field="note" th:text="#{setting.vlan.note}"></th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

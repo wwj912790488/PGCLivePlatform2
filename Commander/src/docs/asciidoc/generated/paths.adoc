@@ -1,0 +1,67 @@
+
+[[_paths]]
+== Paths
+
+[[_getsendusingpost]]
+=== alert告警
+....
+POST /api/alert/send
+....
+
+
+==== Description
+alert告警notes信息
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**access_token** +
+__required__|user access token|string
+|**Header**|**timestamp** +
+__optional__|access timestamp|integer (int32)
+|**Body**|**sysAlert** +
+__required__|告警实体sysAlert|<<_sysalert,SysAlert>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultbean,ResultBean>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json;charset=UTF-8`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* alert-api-controller
+
+
+==== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+

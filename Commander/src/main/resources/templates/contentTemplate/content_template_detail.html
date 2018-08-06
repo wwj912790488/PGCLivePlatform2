@@ -1,0 +1,113 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<script type="text/x-handlebars-template" id="content_template_detail">
+
+    <form class="form-horizontal" id="form-{{indexs}}" >
+        <div class="form-group">
+            <label class="col-sm-2 control-label">模板名称:</label>
+            <div class="col-sm-4">
+                <input type="hidden" name="id" class="form-control" value="{{id}}">
+                <input type="name" name="name" class="form-control" value="{{name}}">
+
+            </div>
+            <div class="col-sm-2 red-icon"><span>*</span></div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2  control-label">标识:</label>
+            <div class="col-sm-4">
+                <input   type="displayName" name="displayName"   class="form-control" value="{{displayName}}">
+            </div>
+
+        </div>
+        <!--
+        <div class="form-group">
+            <label class="col-sm-2 control-label">编码格式</label>
+            <div class="col-sm-4">
+                <select class="form-control" name="videoFormat" id="videoFormat">
+                    <option value="H264">H264</option>
+                </select>
+            </div>
+        </div>
+        -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">分辨率:</label>
+            <div class="col-sm-4">
+                <select onchange="initSizeChange('{{indexs}}');" id="Resolution-{{indexs}}" class="form-control">
+                    <option value="13" pwidth=" " pheight=" " selected="selected">请选择</option>
+                    <option value="1" pwidth="1920" pheight="1080">1080P 16:9（1920x1080）</option>
+                    <option value="2" pwidth="1280" pheight="720">720P 16:9（1280x720）</option>
+                    <option value="3" pwidth="854" pheight="480">480P 16:9（854x480）</option>
+                    <option value="4" pwidth="640" pheight="360">360P 16:9（640x360）</option>
+                    <option value="11" pwidth="" pheight="">自定义</option>
+                </select>
+            </div>
+
+            <div class="col-sm-2">
+                <input type="text" name="videoWidth" class="form-control" id="width1-{{indexs}}"
+                       maxlength="4"
+                       readonly value="{{videoWidth}}">
+
+            </div>
+            <div class="col-sm-1" style="width:10px">
+                <label style="padding-top: 6px;">X</label>
+            </div>
+
+            <div class="col-sm-2">
+                <input type="text" name="videoHeight" class="form-control" id="height1-{{indexs}}" value="{{videoHeight}}"
+                       maxlength="4" readonly>
+            </div>
+            <div class="col-sm-1 red-icon"><span>*</span></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">视频码率:</label>
+            <div class="col-sm-4">
+                <input type="text" name="videoBitrate" class="form-control"   maxlength="4"
+                       value="{{videoBitrate}}">
+            </div>
+
+            <label class="col-sm-1 control-label" style="text-align: left;">kbps</label>
+            <div class="col-sm-1 red-icon"><span>*</span></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">视频帧率:</label>
+            <div class="col-sm-4">
+                <select class="form-control" name="frameRate" id="frameRate">
+                    <option value="0">跟随源</option>
+                    <option value="15">15</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="60">60</option>
+
+                </select>
+            </div>
+            <label class="col-sm-1 control-label" style="text-align: left;">fps &nbsp;&nbsp;</label>
+            <div class="col-sm-1 red-icon"><span>*</span></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" id="audioBitrate1">音频码率:</label>
+            <div class="col-sm-4">
+                <select class="form-control" name="audioBitrate" id="audioBitrate">
+                    <option text="32">32</option>
+                    <option text="48">48</option>
+                    <option text="64">64</option>
+                    <option text="96">96</option>
+                    <option text="128">128</option>
+                </select>
+            </div>
+            <label class="col-sm-1 control-label" style="text-align: left;">kbps</label>
+            <div class="col-sm-1 red-icon">*</div>
+        </div>
+        <div class="form-group">
+            <div class=" col-sm-10 col-sm-offset-2">
+                <button type="submit" class="btn btn-default">&nbsp;保&nbsp;存&nbsp;</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">&nbsp;取&nbsp;消&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</script>
+</html>

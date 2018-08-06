@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default">
+<head>
+    <title>Task Manager</title>
+    <script th:src="@{/js/task/live/live_new.js}"></script>
+</head>
+
+<body>
+<div id="page-wrapper" layout:fragment="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" th:text="${liveTask.id == null} ? #{task.live.create} : #{task.live.edit}">Blank</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <form role="form" data-toggle="validator" id="add-live-task-form" th:action="@{/task/live/save}" th:object="${liveTask}" method="POST">
+                    <div class="panel-body">
+
+                        <input th:type="hidden" th:value="${liveAddress}" id="liveAddress"/>
+                        <input th:type="hidden" th:field="*{id}"/>
+                        <input th:type="hidden" th:field="*{outputUri}"/>
+                        <div class="form-group">
+                            <label th:text="#{task.live.template}"></label>
+                            <select class="form-control" th:field="*{templateId}" required="required">
+                                <option th:each="template, templateStat : ${liveTemplates}" th:value="${template.id}" th:text="${template.name}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label th:text="#{task.live.name}" autofocus="autofocus"></label>
+                            <input class="form-control" th:field="*{name}" required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label th:text="#{task.live.channel}" autofocus="autofocus"></label>
+                            <select class="form-control" th:field="*{content.id}" required="required">
+                                <option th:each="content, templateStat : ${contentList}" th:value="${content.value}" th:text="${content.name}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group output-group">
+
+                        </div>
+                        <button type="submit" id="save-button" class="btn btn-primary pull-right" th:text="#{button.save}"></button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+</body>
+
+</html>

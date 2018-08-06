@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/default">
+<head>
+</head>
+<body>
+<div id="page-wrapper">
+    <div layout:fragment="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" th:text="#{device.control.title}">Blank</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav nav-tabs">
+                    <li><a th:href="@{/device/control}" th:text="#{setting.udp.pool}"></a></li>
+                    <li><a th:href="@{/device/control/vlan}" th:text="#{setting.vlan.setting}"></a></li>
+                    <li class="active"><a th:href="@{/device/control/version}"th:text="#{setting.version}"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group" th:if="${version != null}">
+                            <label th:text="#{device.version} + ': ' + ${version}"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

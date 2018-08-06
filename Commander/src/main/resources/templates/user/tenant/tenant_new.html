@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>创建角色</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/js/bootstrap/css/bootstrap.css}" />
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/common.css}" />
+    <script th:src="@{/js/jquery/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap/validate/bootstrapValidator.js}"></script>
+    <script th:src="@{/js/user/tenant/tenant_new.js}"></script>
+</head>
+<body>
+<div id="page-wrapper" >
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <form role="form" class="form-horizontal" id="add-tenant-form" th:action="@{/user/tenant/save}" th:object="${tenant}" method="POST">
+                    <div class="panel-body">
+                        <input th:type="hidden" th:field="*{id}">
+                        <div class="form-group ">
+                            <label class="col-xs-3 control-label" th:text="#{user.tenant.companyName} + ':'"></label>
+                            <div class="col-xs-9">
+                                <div class="input-group">
+                                    <input class="form-control" th:field="*{companyName}"/>
+                                    <span class="input-group-addon">必填</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--<div class="form-group">
+                            <label class="col-xs-3 control-label" th:text="#{user.tenant.parent}"></label>
+                            <div class="col-xs-9">
+                                <select class="form-control" th:id="parent-form-id" th:field="*{parentId}" >
+                                    <option value="" disabled="disabled">请选择</option>
+                                    <option th:each="parentTenant,stat : ${tenantsList}" th:value="${parentTenant.getId()}" th:text="${parentTenant.getCompanyName()}"  th:selected="${parentTenant.id==tenant.parentId}"></option>
+                                </select>
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" th:text="#{user.tenant.remarks} + ':'"></label>
+                            <div class="col-xs-9">
+                                <textarea class="form-control" rows="5" th:field="*{remarks}" maxlength="100"></textarea>
+                            </div>
+                        </div>
+
+
+                        <nav class="navbar navbar-fixed-bottom">
+                            <div class="row">
+                                <div class="col-xs-offset-4 col-xs-5">
+                                    <button type="button" id="cancel-button" style="width: 80px;" class="btn btn-default" th:text="#{button.cancel}"></button>
+                                    <button type="button" id="save-button" style="width: 80px;" class="btn btn-primary" th:text="#{button.save}"></button>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>创建角色</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/js/bootstrap/css/bootstrap.css}" />
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/common.css}" />
+    <script th:src="@{/js/jquery/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap/validate/bootstrapValidator.js}"></script>
+    <script th:src="@{/js/user/user_cpd.js}"></script>
+</head>
+<body>
+<div id="page-wrapper" >
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <form role="form" class="form-horizontal" id="add-user-form" th:action="@{/user/password/change}" th:object="${userSaveCommand}" method="POST">
+                    <div class="panel-body">
+                        <input th:type="hidden" th:field="*{id}">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" th:text="#{user.user.new.password}+ ':'"></label>
+                            <div class="col-xs-9">
+                                <div class="input-group">
+                                    <input class="form-control"  type="password" th:field="*{password}" maxlength="9" />
+                                    <span class="input-group-addon">必填</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" th:text="#{user.user.new.confirm.password}+ ':'"></label>
+                            <div class="col-xs-9">
+                                <div class="input-group">
+                                    <input class="form-control" type="password" th:field="*{confirmPassword}" maxlength="9" />
+                                    <span class="input-group-addon">必填</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <nav class="navbar navbar-fixed-bottom">
+                            <div class="row">
+                                <div class="col-xs-offset-4 col-xs-6">
+                                    <button type="button" id="cancel-button" style="width: 80px;" class="btn btn-default" th:text="#{button.cancel}"></button>
+                                    <button type="button" id="save-button" style="width: 80px;" class="btn btn-primary" th:text="#{button.save}"></button>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
